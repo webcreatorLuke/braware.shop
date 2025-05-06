@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BraWare - Unique Bracelets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #f8f8f8;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Main Content Styles */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .product-title {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .product-price {
+            color: #2ecc71;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .add-to-cart {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BraWare</div>
+            <div class="cart">🛒 Cart (0)</div>
+        </nav>
+    </header>
+
+    <main class="product-grid">
+        <!-- Product cards will be dynamically added here -->
+    </main>
+
+    <script>
+        // Sample product data
+        const products = [
+            {
+                id: 1,
+                name: "Classic Charm Bracelet",
+                price: 4.99,
+                image: "bracelet1.jpg"
+            },
+            {
+                id: 2,
+                name: "Beaded Friendship Bracelet",
+                price: 9.99,
+                image: "bracelet2.jpg"
+            },
+            // Add more products as needed
+        ];
+
+        // Function to render products
+        function renderProducts() {
+            const productGrid = document.querySelector('.product-grid');
+            
+            products.forEach(product => {
+                const productCard = `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-price">$${product.price}</p>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+                productGrid.innerHTML += productCard;
+            });
+        }
+
+        // Function to add items to cart
+        function addToCart(productId) {
+            // Add cart functionality here
+            alert('Product added to cart!');
+        }
+
+        // Initialize the page
+        renderProducts();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BraWare - Unique Bracelets</title>
+    <style>
+        /* Previous styles remain the same */
+
+        /* Cart Popup Styles */
+        .cart-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .cart-popup.active {
+            display: block;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            max-height: calc(100% - 200px);
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .quantity-btn {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Previous header and main content remain the same -->
+
+    <!-- Add Cart Popup -->
+    <div class="overlay"></div>
+    <div class="cart-popup">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-total">
+            <h3>Total: $<span id="cart-total-amount">0.00</span></h3>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        let cartItems = [];
+
+        // Update the cart icon to open popup
+        document.querySelector('.cart').addEventListener('click', openCart);
+        document.querySelector('.close-cart').addEventListener('click', closeCart);
+        document.querySelector('.overlay').addEventListener('click', closeCart);
+
+        function openCart() {
+            document.querySelector('.cart-popup').classList.add('active');
+            document.querySelector('.overlay').classList.add('active');
+        }
+
+        function closeCart() {
+            document.querySelector('.cart-popup').classList.remove('active');
+            document.querySelector('.overlay').classList.remove('active');
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cartItems.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            updateCartDisplay();
+            openCart();
+        }
+
+        function removeFromCart(productId) {
+            cartItems = cartItems.filter(item => item.id !== productId);
+            updateCartDisplay();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cartItems.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                }
+            }
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.querySelector('.cart-items');
+            cartItemsContainer.innerHTML = '';
+
+            let total = 0;
+
+            cartItems.forEach(item => {
+                total += item.price * item.quantity;
+                const itemElement = `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <p>$${item.price}</p>
+                            <div class="item-quantity">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <button class="quantity-btn" onclick="removeFromCart(${item.id})">🗑️</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.innerHTML += itemElement;
+            });
+
+            document.getElementById('cart-total-amount').textContent = total.toFixed(2);
+            document.querySelector('.cart').textContent = `🛒 Cart (${cartItems.reduce((sum, item) => sum + item.quantity, 0)})`;
+        }
+
+        // Add checkout functionality
+        document.querySelector('.checkout-btn').addEventListener('click', () => {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            // Add your checkout logic here
+            alert('Proceeding to checkout...');
+        });
+    </script>
+</body>
+</html>
+
+
+
+

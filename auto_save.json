@@ -1,0 +1,11 @@
+{
+    "ignore_patterns": [
+        ".git/*",
+        "*.pyc",
+        "__pycache__/*",
+        "backups/*"
+    ],
+    "backup_dir": "backups",
+    "max_backups_per_file": 5,
+    "min_time_between_saves": 5
+}
